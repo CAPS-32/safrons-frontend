@@ -1,4 +1,5 @@
 import GlossaryCard from '../components/GlossaryCard';
+import glossaryImg from '../assets/images/glosarium.webp';
 
 const glossaryData = [
   {
@@ -30,26 +31,48 @@ const glossaryData = [
 
 export default function GlossaryPage() {
   return (
-    <div className="py-12 sm:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-on-surface mb-6 tracking-tight">
+    <div className="w-full">
+      {/* Header with Background Image */}
+      <div className="relative w-full py-20 sm:py-28 overflow-hidden">
+        <img 
+          src={glossaryImg} 
+          alt="Glosarium Latar Belakang" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[#1A2F16]/60"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-tertiary mb-6 tracking-tight">
             Glosarium Pertanian
           </h1>
-          <p className="font-sans text-lg text-on-surface-variant max-w-2xl mx-auto">
+          <p className="font-sans text-lg text-white/90 max-w-2xl mx-auto mb-8">
             Kamus istilah pertanian untuk membantu Anda memahami unsur hara dan konsep penting dalam budidaya tanaman.
           </p>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {glossaryData.map((item, index) => (
-            <GlossaryCard
-              key={index}
-              letter={item.letter}
-              title={item.title}
-              description={item.description}
+          
+          {/* Mock Search Bar */}
+          <div className="max-w-xl mx-auto">
+            <input 
+              type="text" 
+              placeholder="Cari istilah..." 
+              className="w-full px-6 py-4 rounded-full bg-surface-container-lowest/95 backdrop-blur-sm border border-outline/30 focus:outline-none focus:ring-2 focus:ring-primary shadow-lg font-sans text-on-surface"
             />
-          ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Glossary Content */}
+      <div className="py-12 sm:py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {glossaryData.map((item, index) => (
+              <GlossaryCard
+                key={index}
+                letter={item.letter}
+                title={item.title}
+                description={item.description}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
