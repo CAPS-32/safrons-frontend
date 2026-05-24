@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 export default function Navbar() {
@@ -17,13 +16,13 @@ export default function Navbar() {
         </Link>
         <div className="hidden md:flex space-x-1 items-center bg-surface-container-lowest/50 p-1.5 rounded-full border border-outline/30">
           <NavLink to="/" className={navLinkClass}>Beranda</NavLink>
-          <NavLink to="/tentang" className={navLinkClass}>Tentang</NavLink>
-          <NavLink to="/glosarium" className={navLinkClass}>Glosarium</NavLink>
+          <NavLink to="/about" className={navLinkClass}>Tentang</NavLink>
+          <NavLink to="/glossary" className={navLinkClass}>Glosarium</NavLink>
         </div>
         <div className="hidden md:flex ml-4 sm:ml-8">
-          <button className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-sans font-semibold text-sm hover:bg-primary hover:text-on-primary transition-colors shadow-sm shadow-primary-container/30">
+          <Link to="/login" className="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-sans font-semibold text-sm hover:bg-primary hover:text-on-primary transition-colors shadow-sm shadow-primary-container/30">
             Mulai Pemetaan
-          </button>
+          </Link>
         </div>
       </nav>
     </div>
