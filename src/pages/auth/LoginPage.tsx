@@ -2,9 +2,12 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { authService } from '../../services/auth.service';
+import { useAuth } from '../../hooks/useAuth';
+import logoUrl from '../../assets/icons/safrons.png';
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const { refreshUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +20,8 @@ export default function LoginPage() {
 
     try {
       const response = await authService.login({ email, password });
-      localStorage.setItem('token', response.access_token);
+      localStorage.setItem('safrons_token', response.access_token);
+      await refreshUser();
       void navigate('/dashboard');
     } catch (err: unknown) {
       if (axios.isAxiosError(err)) {
@@ -37,12 +41,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="mb-10">
-        <h2 className="font-display text-3xl font-extrabold text-on-surface tracking-tight">
+    <div className="w-full max-w-md mx-auto bg-surface/50 backdrop-blur-md border border-outline-variant p-8 md:p-10 rounded-[2.5rem] shadow-2xl relative z-10">
+      <div className="mb-8 flex flex-col items-center text-center">
+        <Link to="/" className="mb-4 lg:hidden block hover:scale-105 transition-transform duration-300 active:scale-95">
+          <img src={logoUrl} alt="SAFRONS Logo" className="h-12 w-auto mx-auto" />
+        </Link>
+        <h2 className="font-display text-3xl font-extrabold text-primary tracking-tight">
           Selamat Datang Kembali
         </h2>
-        <p className="font-sans text-on-surface-variant mt-2 text-lg">
+        <p className="font-sans text-on-surface-variant mt-2 text-base">
           Masuk untuk mengakses dashboard SAFRONS.
         </p>
       </div>
