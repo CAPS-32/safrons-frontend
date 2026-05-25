@@ -211,6 +211,7 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
         maxBoundsViscosity={1.0}
         className="h-full w-full z-0 relative"
         zoomControl={false}
+        attributionControl={false}
       >
         <MapControls
           setCurrentLocation={setCurrentLocation}
@@ -258,6 +259,11 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
           </Marker>
         )}
       </MapContainer>
+
+      {/* Custom attribution: show basemap provider credit while Leaflet's control is disabled */}
+      <div className="absolute bottom-1 right-1 z-[1000] text-xs bg-white/80 dark:bg-surface/80 text-on-surface px-2 py-1 rounded pointer-events-none">
+        <span dangerouslySetInnerHTML={{ __html: basemapAttributions[activeBasemap] }} />
+      </div>
 
       <MapLegend activeFilter={activeFilter} />
     </>
