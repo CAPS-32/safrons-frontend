@@ -32,7 +32,10 @@ export default function LandingPage() {
           </div>
 
           <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl [@media(max-height:780px)]:text-5xl [@media(max-height:780px)]:md:text-6xl [@media(max-height:780px)]:lg:text-7xl [@media(max-height:680px)]:text-4xl [@media(max-height:680px)]:md:text-5xl [@media(max-height:680px)]:lg:text-6xl font-extrabold text-primary leading-[1.05] max-w-5xl tracking-tight">
-            Smart Agriculture and Fertilizer Recommendation System
+            Smart Agriculture <br />
+            and Fertilizer <br />
+            Recommendation <br />
+            System
           </h1>
 
           <p className="text-on-surface-variant text-lg md:text-xl lg:text-2xl [@media(max-height:780px)]:text-base [@media(max-height:780px)]:md:text-lg [@media(max-height:780px)]:lg:text-xl [@media(max-height:680px)]:text-base [@media(max-height:680px)]:md:text-base [@media(max-height:680px)]:lg:text-lg max-w-3xl mt-8 [@media(max-height:780px)]:mt-6 [@media(max-height:680px)]:mt-4 font-sans leading-relaxed">
