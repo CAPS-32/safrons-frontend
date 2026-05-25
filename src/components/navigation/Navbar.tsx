@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import { Bars3Icon, ArrowRightOnRectangleIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '../../hooks/useAuth';
 import logoUrl from '../../assets/icons/safrons.png';
+import { PUBLIC_NAV_LINKS, AUTHENTICATED_NAV_LINKS } from '../../constants/navigation';
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -47,17 +48,19 @@ export default function Navbar() {
         <nav className="hidden md:flex items-center gap-6">
           {!isAuthenticated ? (
             <>
-              <NavLink to="/" className={navLinkClass}>Beranda</NavLink>
-              <NavLink to="/about" className={navLinkClass}>Tentang</NavLink>
-              <NavLink to="/glossary" className={navLinkClass}>Glosarium</NavLink>
+              {PUBLIC_NAV_LINKS.map((link) => (
+                <NavLink key={link.path} to={link.path} className={navLinkClass}>
+                  {link.label}
+                </NavLink>
+              ))}
             </>
           ) : (
             <>
-              <NavLink to="/" className={navLinkClass}>Beranda</NavLink>
-              <NavLink to="/dashboard" className={navLinkClass}>Peta</NavLink>
-              <NavLink to="/records" className={navLinkClass}>Tersimpan</NavLink>
-              <NavLink to="/about" className={navLinkClass}>Tentang</NavLink>
-              <NavLink to="/glossary" className={navLinkClass}>Glosarium</NavLink>
+              {AUTHENTICATED_NAV_LINKS.map((link) => (
+                <NavLink key={link.path} to={link.path} className={navLinkClass}>
+                  {link.label}
+                </NavLink>
+              ))}
             </>
           )}
         </nav>
@@ -158,9 +161,16 @@ export default function Navbar() {
       {mobileMenuOpen && !isAuthenticated && (
         <div className="md:hidden bg-surface/95 backdrop-blur-xl border-b border-outline-variant shadow-xl absolute w-full left-0 top-16 animate-fade-in-up">
           <div className="px-4 pt-4 pb-4 space-y-2">
-            <NavLink to="/" onClick={() => setMobileMenuOpen(false)} className={mobileNavLinkClass}>Beranda</NavLink>
-            <NavLink to="/about" onClick={() => setMobileMenuOpen(false)} className={mobileNavLinkClass}>Tentang</NavLink>
-            <NavLink to="/glossary" onClick={() => setMobileMenuOpen(false)} className={mobileNavLinkClass}>Glosarium</NavLink>
+            {PUBLIC_NAV_LINKS.map((link) => (
+              <NavLink 
+                key={link.path} 
+                to={link.path} 
+                onClick={() => setMobileMenuOpen(false)} 
+                className={mobileNavLinkClass}
+              >
+                {link.label}
+              </NavLink>
+            ))}
           </div>
           <div className="px-4 py-6 border-t border-outline-variant flex flex-col gap-3">
             <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="block w-full text-center px-4 py-3 font-sans text-primary border border-primary rounded-full font-semibold hover:bg-primary/5 transition-all">
@@ -173,7 +183,7 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Logout Modal - Rendered via React Portal */}
+      {/* Logout Modal */}
       {showLogoutModal && createPortal(
         <div className="fixed inset-0 bg-on-surface/50 backdrop-blur-sm z-[3000] flex items-center justify-center p-4 pointer-events-auto">
           <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-xl w-96 max-w-full animate-fade-in-up border border-outline-variant">
