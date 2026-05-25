@@ -13,6 +13,8 @@
     "@fontsource/manrope": "^5.2.8",
     "@fontsource/plus-jakarta-sans": "^5.2.8",
     "@heroicons/react": "^2.2.0",
+    "@turf/boolean-point-in-polygon": "^7.3.5",
+    "@turf/helpers": "^7.3.5",
     "axios": "^1.16.1",
     "leaflet": "^1.9.4",
     "react": "^19.2.6",
