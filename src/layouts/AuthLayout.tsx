@@ -1,45 +1,79 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useNavigate } from 'react-router-dom';
 import authImg from '../assets/images/autentikasi.webp';
+import { useAuth } from '../hooks/useAuth';
+import { useEffect } from 'react';
+import logoUrl from '../assets/icons/safrons.png';
 
 export default function AuthLayout() {
-  return (
-    <div className="flex min-h-screen bg-surface">
-      {/* Left side */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-surface-variant overflow-hidden">
-        <img
-          src={authImg}
-          alt="Smart Agriculture"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/90 to-[#0A230D]/70 mix-blend-multiply" />
-        
-        <div className="relative z-10 flex flex-col justify-center items-center w-full h-full p-12 text-center">
-          <Link to="/" className="inline-block mb-8">
-            <h1 className="font-display text-5xl font-extrabold text-tertiary tracking-tight">
-              SAFRONS
-            </h1>
-            <p className="font-sans text-xl text-white mt-2 font-semibold tracking-wide">
-              Precision Agritech
-            </p>
-          </Link>
-          <p className="font-sans text-lg text-white/90 max-w-md leading-relaxed">
-            Platform cerdas untuk memetakan unsur hara dan memberikan rekomendasi pemupukan secara real-time.
-          </p>
+  const { isAuthenticated, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoading && isAuthenticated) {
+      void navigate('/dashboard');
+    }
+  }, [isLoading, isAuthenticated, navigate]);
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-surface">
+        <div className="text-xl font-bold text-primary animate-pulse font-display">
+          Memuat SAFRONS...
         </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col justify-center min-h-screen md:h-screen overflow-y-auto md:overflow-hidden bg-gradient-to-br from-surface-dim via-surface-bright to-primary-container relative">
+      
+      {/* Background Image */}
+      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[80%] flex justify-end items-center opacity-70 pointer-events-none z-0">
+        <img 
+          src={authImg} 
+          alt="Smart Agriculture" 
+          fetchPriority="high"
+          className="w-full h-full object-cover object-left"
+          style={{ 
+            WebkitMaskImage: 'radial-gradient(ellipse at 80% 50%, black 10%, transparent 75%)', 
+            maskImage: 'radial-gradient(ellipse at 80% 50%, black 10%, transparent 75%)' 
+          }}
+        />
       </div>
 
-      {/* Right side */}
-      <div className="flex flex-col justify-center w-full lg:w-1/2 px-4 sm:px-6 lg:px-20 xl:px-24">
-        <div className="lg:hidden text-center mb-8 pt-8">
-          <Link to="/">
-            <h1 className="font-display text-4xl font-extrabold text-primary tracking-tight">
-              SAFRONS
-            </h1>
-          </Link>
-        </div>
+      {/* Decorative ambient glows */}
+      <div className="absolute top-10 left-10 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-tertiary/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <main className="flex-grow flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 py-10 md:py-0 gap-16">
         
-        <Outlet />
-      </div>
+        {/* Left Side: Branding Content - Hidden on mobile, shown on desktop */}
+        <div className="hidden lg:flex flex-col justify-center items-start text-left w-full lg:w-[55%]">
+          <Link to="/" className="inline-flex items-center gap-4 mb-8 hover:scale-105 transition-transform duration-300 active:scale-98 cursor-pointer">
+            <img src={logoUrl} alt="SAFRONS Logo" className="h-16 w-auto" />
+            <span className="font-display text-5xl font-extrabold text-primary tracking-tight">
+              SAFRONS
+            </span>
+          </Link>
+          
+          <h2 className="font-display text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] max-w-xl tracking-tight">
+            Smart Agriculture <br />
+            and Fertilizer <br />
+            Recommendation <br />
+            System
+          </h2>
+          
+          <p className="text-on-surface-variant text-base md:text-lg max-w-lg mt-6 font-sans leading-relaxed">
+            Platform analitik spasial presisi tinggi untuk pemetaan kesuburan lahan, mendukung optimalisasi hasil agronomi dan pengelolaan lahan yang berkelanjutan.
+          </p>
+        </div>
+
+        {/* Right Side: Glassmorphic Auth Form Container */}
+        <div className="w-full lg:w-[45%] flex justify-center lg:justify-end">
+          <Outlet />
+        </div>
+
+      </main>
     </div>
   );
 }
