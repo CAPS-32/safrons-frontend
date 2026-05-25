@@ -1,5 +1,6 @@
 import FaqAccordion from '../components/FaqAccordion';
 import aboutImg from '../assets/images/tentang.webp';
+import { ABOUT_DATA } from '../constants/about';
 
 export default function AboutPage() {
   return (
@@ -18,10 +19,10 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <section className="mb-24 text-center">
             <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-on-surface mb-8 tracking-tight">
-              Apa itu SAFRONS?
+              {ABOUT_DATA.title}
             </h1>
             <p className="font-sans text-lg sm:text-xl text-on-surface-variant leading-relaxed max-w-3xl mx-auto bg-surface-container-lowest p-8 rounded-3xl border border-outline/30 shadow-sm shadow-primary/5">
-              Smart Agriculture and Fertilizer Recommendation System (SAFRONS) adalah platform khusus yang dikembangkan oleh mahasiswa IPB University untuk mempermudah petani dalam mengetahui informasi kandungan unsur hara lahan dan rekomendasi pemupukan yang tepat agar dapat menghasilkan komoditas tanaman pertanian yang optimal.
+              {ABOUT_DATA.description}
             </p>
           </section>
           

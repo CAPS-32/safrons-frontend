@@ -3,38 +3,54 @@ import heroImg from '../assets/images/beranda.webp';
 
 export default function LandingPage() {
   return (
-    <div className="flex flex-col justify-center min-h-[calc(100vh-6rem)] pt-12 lg:pt-20 pb-12">
-      <main className="flex-grow flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full gap-12 lg:gap-8">
-        
-        {/* Left Side */}
-        <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left w-full lg:w-1/2 lg:pr-8">
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-on-surface tracking-tight leading-tight">
-            Presisi Pemupukan untuk <span className="text-primary-container">Masa Depan</span> Pertanian
+    <div className="flex flex-col justify-center h-[calc(100vh-4.5rem)] overflow-y-auto md:overflow-hidden bg-gradient-to-br from-surface-dim via-surface-bright to-primary-container relative">
+
+      {/* Background Masked Hero Image */}
+      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[80%] flex justify-end items-center opacity-70 pointer-events-none z-0">
+        <img
+          src={heroImg}
+          alt="SAFRONS Agritech Platform"
+          fetchPriority="high"
+          className="w-full h-full object-cover object-left"
+          style={{
+            WebkitMaskImage: 'radial-gradient(ellipse at 80% 50%, black 10%, transparent 75%)',
+            maskImage: 'radial-gradient(ellipse at 80% 50%, black 10%, transparent 75%)'
+          }}
+        />
+      </div>
+
+      <main className="flex-grow flex flex-col items-start justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 py-10 md:py-0">
+
+        {/* Left Side Content */}
+        <div className="flex flex-col justify-center items-start text-left w-full lg:w-[65%]">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface/60 backdrop-blur-md text-primary font-sans font-bold text-sm mb-6 [@media(max-height:780px)]:mb-4 [@media(max-height:680px)]:mb-3 border border-primary/20 shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+            </span>
+            Platform Agritech Jawa Barat
+          </div>
+
+          <h1 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl [@media(max-height:780px)]:text-5xl [@media(max-height:780px)]:md:text-6xl [@media(max-height:780px)]:lg:text-7xl [@media(max-height:680px)]:text-4xl [@media(max-height:680px)]:md:text-5xl [@media(max-height:680px)]:lg:text-6xl font-extrabold text-primary leading-[1.05] max-w-5xl tracking-tight">
+            Smart Agriculture <br />
+            and Fertilizer <br />
+            Recommendation <br />
+            System
           </h1>
-          <p className="font-sans text-lg sm:text-xl text-on-surface-variant mt-8 leading-relaxed max-w-2xl lg:max-w-none">
-            Platform cerdas untuk memetakan unsur hara dan memberikan rekomendasi pemupukan 5T secara real-time di Jawa Barat.
+
+          <p className="text-on-surface-variant text-lg md:text-xl lg:text-2xl [@media(max-height:780px)]:text-base [@media(max-height:780px)]:md:text-lg [@media(max-height:780px)]:lg:text-xl [@media(max-height:680px)]:text-base [@media(max-height:680px)]:md:text-base [@media(max-height:680px)]:lg:text-lg max-w-3xl mt-8 [@media(max-height:780px)]:mt-6 [@media(max-height:680px)]:mt-4 font-sans leading-relaxed">
+            Platform analitik spasial presisi tinggi untuk pemetaan kesuburan lahan, mendukung optimalisasi hasil agronomi dan pengelolaan lahan yang berkelanjutan.
           </p>
-          <div className="mt-12 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-            <Link to="/login" className="bg-primary-container text-on-primary-container px-8 py-4 rounded-xl font-sans font-bold hover:bg-primary transition-all duration-300 shadow-lg shadow-primary-container/20 hover:-translate-y-1 flex items-center justify-center">
+
+          <div className="mt-10 [@media(max-height:780px)]:mt-8 [@media(max-height:680px)]:mt-5 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+            <Link to="/login" className="bg-primary text-white px-10 py-4 [@media(max-height:680px)]:px-8 [@media(max-height:680px)]:py-3 rounded-full font-sans font-bold hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:scale-105 flex items-center justify-center text-lg [@media(max-height:680px)]:text-base">
               Jelajahi Peta Lahan
             </Link>
-            <Link to="/about" className="bg-surface-container-lowest text-on-surface border-2 border-outline px-8 py-4 rounded-xl font-sans font-bold hover:bg-surface hover:border-primary-container transition-all duration-300 flex items-center justify-center">
+            <Link to="/about" className="bg-surface/80 backdrop-blur-sm text-primary border border-outline-variant px-10 py-4 [@media(max-height:680px)]:px-8 [@media(max-height:680px)]:py-3 rounded-full font-sans font-bold hover:bg-surface-dim transition-all duration-300 hover:scale-105 flex items-center justify-center text-lg shadow-sm [@media(max-height:680px)]:text-base">
               Pelajari Sistem
             </Link>
           </div>
         </div>
-
-        {/* Right Side */}
-        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-lg lg:max-w-xl aspect-[4/3] rounded-3xl overflow-hidden shadow-lg shadow-primary/20 border border-outline/20">
-            <img 
-              src={heroImg} 
-              alt="SAFRONS Agritech Platform" 
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
       </main>
     </div>
   );
