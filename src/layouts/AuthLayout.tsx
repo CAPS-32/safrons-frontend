@@ -16,9 +16,22 @@ export default function AuthLayout() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-surface">
-        <div className="text-xl font-bold text-primary animate-pulse font-display">
-          Memuat SAFRONS...
+      <div className="flex flex-col h-screen w-screen items-center justify-center bg-surface transition-all duration-300">
+        <div className="flex flex-col items-center justify-center space-y-5 animate-fade-in">
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-24 h-24 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+            <div className="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center shadow-lg border border-outline-variant/30 animate-pulse">
+              <img src={logoUrl} alt="SAFRONS Logo" className="w-10 h-10 object-contain" />
+            </div>
+          </div>
+          <div className="flex flex-col items-center space-y-1">
+            <span className="text-2xl font-black text-primary font-display tracking-wider">
+              SAFRONS
+            </span>
+            <span className="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest animate-pulse">
+              Memuat Sistem...
+            </span>
+          </div>
         </div>
       </div>
     );
@@ -28,7 +41,7 @@ export default function AuthLayout() {
     <div className="flex flex-col justify-center min-h-screen md:h-screen overflow-y-auto md:overflow-hidden bg-gradient-to-br from-surface-dim via-surface-bright to-primary-container relative">
       
       {/* Background Image */}
-      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[80%] flex justify-end items-center opacity-70 pointer-events-none z-0">
+      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[80%] flex justify-end items-center opacity-20 lg:opacity-70 pointer-events-none z-0">
         <img 
           src={authImg} 
           alt="Smart Agriculture" 
