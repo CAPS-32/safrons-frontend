@@ -97,20 +97,18 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
     });
   }, [onPolygonClick, styleRef]);
 
-  const hasData = geoData !== null;
-  // Memoize the heavy GeoJSON layer
   const geoJsonLayer = React.useMemo(() => {
     if (!geoData) return null;
     return (
       <GeoJSON
+        key={`geojson-layer-${geoData.features.length}`}
         ref={geoJsonRef}
         data={geoData}
         style={getPolygonStyle}
         onEachFeature={onEachFeature as any}
       />
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasData, activeFilter, getPolygonStyle, onEachFeature]);
+  }, [geoData, activeFilter, getPolygonStyle, onEachFeature]);
 
   return (
     <>
