@@ -96,8 +96,8 @@ export default function UserTable({
 
   return (
     <div className="bg-surface-container-lowest rounded-3xl border border-outline-variant shadow-md overflow-hidden">
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-outline-variant/40">
+      <div className="overflow-x-auto w-full">
+        <table className="min-w-[768px] md:min-w-full divide-y divide-outline-variant/40">
           <thead className="bg-surface-dim text-left">
             <tr>
               <th className="px-4 py-3.5 text-xs font-bold text-on-surface-variant uppercase tracking-wider">Nama</th>
