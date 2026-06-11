@@ -58,7 +58,7 @@ export default function AuthLayout() {
       <div className="absolute top-10 left-10 w-96 h-96 bg-primary/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-tertiary/10 rounded-full blur-[100px] pointer-events-none"></div>
 
-      <main className="flex-grow flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 py-10 md:py-0 gap-16">
+      <main className="flex-grow flex flex-col lg:flex-row items-center justify-center lg:justify-between px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 py-10 md:py-0 gap-16">
         
         {/* Left Side: Branding Content - Hidden on mobile, shown on desktop */}
         <div className="hidden lg:flex flex-col justify-center items-start text-left w-full lg:w-[55%]">
