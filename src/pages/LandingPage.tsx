@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/beranda.webp';
-import logoUrl from '../assets/icons/safrons.png';
 
 export default function LandingPage() {
   return (
