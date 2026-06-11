@@ -11,6 +11,8 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 import SavedRecordsPage from './pages/dashboard/SavedRecordsPage';
 import ProfilePage from './pages/dashboard/ProfilePage';
+import ExpertDashboardPage from './pages/dashboard/ExpertDashboardPage';
+import AdminPanelPage from './pages/admin/AdminPanelPage';
 
 function App() {
   return (
@@ -32,6 +34,8 @@ function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/dashboard" element={<div />} />
             <Route path="/records" element={<SavedRecordsPage />} />
+            <Route path="/expert/panel" element={<ExpertDashboardPage />} />
+            <Route path="/admin/panel" element={<AdminPanelPage />} />
             <Route path="/dashboard/analysis" element={<div />} />
             <Route path="/dashboard/reports" element={<div />} />
             <Route path="/dashboard/admin" element={<div />} />
