@@ -6,6 +6,7 @@ import { useToast } from '../../contexts/ToastContext';
 import { MapPinIcon, MapIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { formatSlope, formatTexture, getPhBadge, getNBadge, getPBadge, getKBadge } from '../../utils/agronomyHelper';
 import type { SavedRegionRead } from '../../types/api.types';
+import logoUrl from '../../assets/icons/safrons.png';
 
 export default function SavedRecordsPage() {
   const [records, setRecords] = useState<SavedRegionRead[]>([]);
@@ -56,7 +57,17 @@ export default function SavedRecordsPage() {
   if (isLoading) {
     return (
       <div className="flex h-full items-center justify-center bg-surface-dim">
-        <div className="animate-pulse font-display text-primary font-bold text-xl">Memuat data...</div>
+        <div className="flex flex-col items-center justify-center space-y-4 animate-fade-in">
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+            <div className="w-10 h-10 bg-surface-container rounded-full flex items-center justify-center shadow-md border border-outline-variant/30">
+              <img src={logoUrl} alt="SAFRONS Logo" className="w-6 h-6 object-contain" />
+            </div>
+          </div>
+          <span className="text-sm font-display font-bold text-primary animate-pulse tracking-wide">
+            Memuat Lahan Tersimpan...
+          </span>
+        </div>
       </div>
     );
   }
