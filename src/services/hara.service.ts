@@ -7,7 +7,8 @@ import type {
   AdvisoryCreate,
   AdvisoryUpdate,
   HaraAreaCreate,
-  MacroAnalyticsRead
+  MacroAnalyticsRead,
+  HaraDiagnosisRead
 } from '../types/api.types';
 
 export const haraService = {
@@ -53,6 +54,11 @@ export const haraService = {
 
   getMacroAnalytics: async (): Promise<MacroAnalyticsRead> => {
     const response = await apiClient.get<MacroAnalyticsRead>('/api/v1/expert/analytics');
+    return response.data;
+  },
+
+  getDiagnosis: async (areaId: number): Promise<HaraDiagnosisRead> => {
+    const response = await apiClient.get<HaraDiagnosisRead>(`/api/v1/hara/areas/${areaId}/diagnosis`);
     return response.data;
   },
 };
