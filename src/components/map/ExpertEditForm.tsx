@@ -129,8 +129,9 @@ export const ExpertEditForm: React.FC<ExpertEditFormProps> = ({
             value={formData.slope__}
             onChange={(e) => setFormData((prev) => ({ ...prev, slope__: e.target.value }))}
             className="w-full bg-surface border border-outline-variant/80 px-3 py-2.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-            placeholder="Masukkan persentase lereng..."
+            placeholder="Contoh: 0-8"
           />
+          <span className="text-[10px] text-on-surface-variant/60 mt-1 block">Rekomendasi: &lt;2, 0-8, 2-8, 9-15, 16-25, 26-40, 41-60, &gt;60</span>
         </div>
 
         <div>
@@ -142,8 +143,17 @@ export const ExpertEditForm: React.FC<ExpertEditFormProps> = ({
             value={formData.texture_of}
             onChange={(e) => setFormData((prev) => ({ ...prev, texture_of: e.target.value }))}
             className="w-full bg-surface border border-outline-variant/80 px-3 py-2.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-            placeholder="Masukkan tekstur tanah..."
+            placeholder="Contoh: medium"
           />
+          <span className="text-[10px] text-on-surface-variant/60 mt-1 block">Rekomendasi: medium, fine, mod. fine, mod. coarse</span>
+        </div>
+
+        <div className="bg-surface-container/60 rounded-xl p-3 text-[11px] text-on-surface-variant space-y-1 border border-outline-variant/40">
+          <p className="font-bold text-primary font-display">Info:</p>
+          <p className="font-sans leading-normal">
+            Lereng (%). Contoh: <code>0-8</code> (datar), <code>9-15</code> (sedang), <code>16-25</code> (curam). <br />
+            Tekstur. Contoh: <code>medium</code> (Sedang), <code>fine</code> (Liat Halus), <code>mod. fine</code> (Liat Cukup Halus).
+          </p>
         </div>
       </div>
 

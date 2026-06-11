@@ -534,114 +534,128 @@ export default function ExpertDashboardPage() {
                 2. Metrik Hara & Karakteristik Fisik
               </h3>
 
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display">
-                    Seri Klasifikasi Lahan
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-                    placeholder="Masukkan nama seri tanah (misal: Rancaekek)..."
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
-                      <span>pH Tanah</span>
-                      <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: 0 - 14)</span>
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      max="14"
-                      value={formData.ph_rata2}
-                      onChange={(e) => setFormData(prev => ({ ...prev, ph_rata2: e.target.value }))}
-                      className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-                      placeholder="Masukkan nilai pH (contoh: 6.2)"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
-                      <span>Nitrogen (N)</span>
-                      <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: ≥ 0 ppm)</span>
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.n_rata2}
-                      onChange={(e) => setFormData(prev => ({ ...prev, n_rata2: e.target.value }))}
-                      className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-                      placeholder="Masukkan nilai N (contoh: 22.4)"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
-                      <span>Fosfor (P)</span>
-                      <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: ≥ 0 ppm)</span>
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.p_rata2}
-                      onChange={(e) => setFormData(prev => ({ ...prev, p_rata2: e.target.value }))}
-                      className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-                      placeholder="Masukkan nilai P (contoh: 15.6)"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
-                      <span>Kalium (K)</span>
-                      <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: ≥ 0 mg/100g)</span>
-                    </label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      min="0"
-                      value={formData.k_rata2}
-                      onChange={(e) => setFormData(prev => ({ ...prev, k_rata2: e.target.value }))}
-                      className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-                      placeholder="Masukkan nilai K (contoh: 18.2)"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <div className="lg:col-span-2 space-y-6">
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display">
-                      Kemiringan Lereng (%)
+                      Seri Klasifikasi Lahan
                     </label>
                     <input
                       type="text"
-                      value={formData.slope__}
-                      onChange={(e) => setFormData(prev => ({ ...prev, slope__: e.target.value }))}
+                      value={formData.name}
+                      onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                       className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-                      placeholder="Contoh: 0-8"
+                      placeholder="Masukkan nama seri tanah (misal: Rancaekek)..."
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display">
-                      Tekstur Tanah
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.texture_of}
-                      onChange={(e) => setFormData(prev => ({ ...prev, texture_of: e.target.value }))}
-                      className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
-                      placeholder="Contoh: Medium / Mod. Fine"
-                    />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
+                        <span>pH Tanah</span>
+                        <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: 0 - 14)</span>
+                      </label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        max="14"
+                        value={formData.ph_rata2}
+                        onChange={(e) => setFormData(prev => ({ ...prev, ph_rata2: e.target.value }))}
+                        className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                        placeholder="Masukkan nilai pH (contoh: 6.2)"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
+                        <span>Nitrogen (N)</span>
+                        <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: ≥ 0 ppm)</span>
+                      </label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.n_rata2}
+                        onChange={(e) => setFormData(prev => ({ ...prev, n_rata2: e.target.value }))}
+                        className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                        placeholder="Masukkan nilai N (contoh: 22.4)"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
+                        <span>Fosfor (P)</span>
+                        <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: ≥ 0 ppm)</span>
+                      </label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.p_rata2}
+                        onChange={(e) => setFormData(prev => ({ ...prev, p_rata2: e.target.value }))}
+                        className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                        placeholder="Masukkan nilai P (contoh: 15.6)"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display flex items-baseline justify-between">
+                        <span>Kalium (K)</span>
+                        <span className="text-[10px] text-on-surface-variant/60 font-sans font-normal">(Batas: ≥ 0 mg/100g)</span>
+                      </label>
+                      <input
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        value={formData.k_rata2}
+                        onChange={(e) => setFormData(prev => ({ ...prev, k_rata2: e.target.value }))}
+                        className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                        placeholder="Masukkan nilai K (contoh: 18.2)"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display">
+                        Kemiringan Lereng (%)
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.slope__}
+                        onChange={(e) => setFormData(prev => ({ ...prev, slope__: e.target.value }))}
+                        className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                        placeholder="Contoh: 0-8"
+                      />
+                      <span className="text-[10px] text-on-surface-variant/60 mt-1 block">Rekomendasi: &lt;2, 0-8, 2-8, 9-15, 16-25, 26-40, 41-60, &gt;60</span>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-on-surface-variant mb-1 font-display">
+                        Tekstur Tanah
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.texture_of}
+                        onChange={(e) => setFormData(prev => ({ ...prev, texture_of: e.target.value }))}
+                        className="w-full bg-surface border border-outline-variant/80 px-4 py-3.5 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                        placeholder="Contoh: medium"
+                      />
+                      <span className="text-[10px] text-on-surface-variant/60 mt-1 block">Rekomendasi: medium, fine, mod. fine, mod. coarse</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-1 h-full flex flex-col">
+                  <div className="bg-surface-container/60 rounded-2xl p-5 text-xs text-on-surface-variant space-y-3 border border-outline-variant/50 flex-1">
+                    <p className="font-bold text-primary font-display text-sm">Panduan Input Karakteristik Fisik:</p>
+                    <ul className="list-disc pl-4 space-y-2 font-sans leading-normal">
+                      <li><strong>Kemiringan Lereng:</strong> Masukkan range kelandaian (contoh: <code>0-8</code> untuk Datar/Landai, <code>9-15</code> Sedang, <code>16-25</code> Curam, <code>41-60</code> Sangat Curam).</li>
+                      <li><strong>Tekstur Tanah:</strong> Gunakan istilah teknis (<code>medium</code> = Sedang, <code>fine</code> = Liat Halus, <code>mod. fine</code> = Liat Cukup Halus, <code>mod. coarse</code> = Pasir Cukup Kasar).</li>
+                    </ul>
                   </div>
                 </div>
               </div>

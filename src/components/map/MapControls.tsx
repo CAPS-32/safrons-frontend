@@ -50,7 +50,7 @@ export const MapControls: React.FC<MapControlsProps> = ({
       const viewbox = '106.2,-5.9,107.2,-7.6';
       
       const res = await axios.get(
-        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&viewbox=${viewbox}&bounded=1`
+        `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&countrycodes=id&viewbox=${viewbox}`
       );
       
       if (res.data && res.data.length > 0) {
