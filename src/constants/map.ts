@@ -59,3 +59,28 @@ export const MAP_LEGENDS = {
     ]
   }
 };
+
+export const DEFAULT_CENTER: [number, number] = [-6.595, 106.816];
+export const DEFAULT_ZOOM = 12;
+export const MIN_ZOOM = 6;
+
+export const BASEMAP_URLS: Record<string, string> = {
+  'satelit': 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  'standar': 'https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
+  'jalan': 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png',
+  'topografi': 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+};
+
+export const BASEMAP_LABELS_URLS: Record<string, string | null> = {
+  'satelit': 'https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+  'standar': 'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
+  'jalan': 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png',
+  'topografi': 'https://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png'
+};
+
+export const BASEMAP_ATTRIBUTIONS: Record<string, string> = {
+  'satelit': '&copy; ESRI',
+  'standar': '&copy; CartoDB',
+  'jalan': '&copy; CartoDB &copy; OpenStreetMap',
+  'topografi': '&copy; ESRI'
+};
