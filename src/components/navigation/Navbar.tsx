@@ -64,8 +64,8 @@ export default function Navbar() {
       <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Left: Logo */}
         <div className="flex items-center">
-          <Link to="/" className="flex items-center gap-2.5 text-3xl font-display font-bold text-primary tracking-tight py-4">
-            <img src={logoUrl} alt="SAFRONS Logo" className="h-10 w-auto" />
+          <Link to="/" className="flex items-center gap-1.5 sm:gap-2.5 text-2xl sm:text-3xl font-display font-bold text-primary tracking-tight py-4">
+            <img src={logoUrl} alt="SAFRONS Logo" className="h-9 sm:h-10 w-auto" />
             SAFRONS
           </Link>
         </div>

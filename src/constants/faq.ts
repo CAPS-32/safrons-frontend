@@ -5,15 +5,15 @@ export const FAQ_DATA = [
   },
   {
     question: "Bagaimana cara membaca peta interaktif SAFRONS?",
-    answer: "1. Batas wilayah administrasi dan lahan diwakili oleh poligon berwarna pada peta.\n2. Klik pada salah satu poligon untuk membuka panel informasi detail lahan di sebelah kiri layar (atau dari bawah layar pada perangkat seluler).\n3. Anda dapat menggeser peta dengan menyeret kursor atau jari Anda, serta memperbesar dan memperkecil peta menggunakan tombol plus/minus (+/-) di sudut kanan bawah atau dengan gerakan mencubit layar."
+    answer: "1. Batas wilayah administrasi dan lahan diwakili oleh poligon berwarna pada peta.\n2. Klik pada salah satu poligon untuk membuka panel informasi detail lahan di sebelah kiri layar (atau dari bawah layar pada perangkat seluler).\n3. Anda dapat menggeser peta dengan menyeret kursor atau jari Anda, serta memperbesar dan memperkecil peta menggunakan scroll mouse (pada komputer/laptop) atau gerakan mencubit layar (pada layar sentuh/trackpad)."
   },
   {
     question: "Bagaimana cara mengubah tampilan peta (basemap)?",
-    answer: "1. Klik tombol kontrol layer (ikon tumpukan kertas) yang berada di sudut kanan atas peta interaktif.\n2. Pilih jenis basemap yang Anda inginkan:\n- OpenStreetMap: Menampilkan peta jalan standar, batas administratif, nama wilayah, dan objek penting.\n- Esri World Imagery: Menampilkan citra satelit bumi secara detail untuk melihat vegetasi nyata dan rupa bumi.\n- CartoDB Dark Matter: Menampilkan peta jalan dengan warna gelap yang ramah di mata."
+    answer: "1. Klik tombol Kontrol Peta (ikon roda gigi/slider pengaturan) yang berada di sudut kanan atas peta interaktif untuk membuka panel Kontrol Peta.\n2. Buka bagian Pilihan Basemap lalu pilih jenis basemap yang Anda inginkan:\n- OpenStreetMap: Menampilkan peta jalan standar, batas administratif, nama wilayah, dan objek penting.\n- Esri World Imagery: Menampilkan citra satelit bumi secara detail untuk melihat vegetasi nyata dan rupa bumi.\n- CartoDB Dark Matter: Menampilkan peta jalan dengan warna gelap yang ramah di mata."
   },
   {
     question: "Bagaimana cara mencari lokasi lahan tertentu di peta?",
-    answer: "1. Gunakan bilah pencarian (search bar) di sudut kiri atas peta.\n2. Ketik nama wilayah atau desa yang ingin Anda cari (misalnya: Karawang, Bogor, atau wilayah lainnya di Indonesia).\n3. Klik nama lokasi dari daftar rekomendasi atau tekan Enter. Peta akan otomatis memindahkan fokus dan melakukan zoom ke lokasi yang Anda cari."
+    answer: "1. Klik tombol Kontrol Peta (ikon roda gigi/slider pengaturan) di sudut kanan atas peta interaktif untuk membuka panel Kontrol Peta.\n2. Pada kolom Cari Lokasi, ketik nama wilayah atau desa yang ingin Anda cari (khusus area Bogor dan sekitarnya sesuai cakupan data).\n3. Tekan Enter atau klik ikon pencarian. Peta akan otomatis memindahkan fokus dan melakukan zoom ke lokasi tersebut."
   },
   {
     question: "Apa perbedaan dan arti dari status kesesuaian lahan S1, S2, S3, dan N?",
@@ -29,7 +29,7 @@ export const FAQ_DATA = [
   },
   {
     question: "Bagaimana cara menyimpan atau menandai wilayah lahan ke akun saya?",
-    answer: "1. Pastikan Anda sudah masuk (login) ke akun SAFRONS Anda.\n2. Cari dan klik poligon wilayah lahan yang ingin Anda simpan pada peta.\n3. Klik tombol bookmark (Simpan Lahan) yang terletak di bagian atas panel detail informasi.\n4. Anda dapat melihat kembali semua daftar lahan yang disimpan kapan saja melalui menu Lahan Tersimpan di bilah navigasi."
+    answer: "1. Pastikan Anda sudah masuk (login) ke akun SAFRONS Anda.\n2. Cari dan klik poligon wilayah lahan yang ingin Anda simpan pada peta.\n3. Klik tombol 'Simpan Lahan Ini' (dengan ikon bookmark) yang terletak di bagian bawah panel detail informasi lahan.\n4. Anda dapat melihat kembali semua daftar lahan yang disimpan kapan saja melalui menu Lahan Tersimpan di bilah navigasi."
   },
   {
     question: "Bagaimana cara mengajukan pendaftaran akun sebagai Pakar (Expert)?",
