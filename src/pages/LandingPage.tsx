@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/beranda.webp';
+import { useAuth } from '../hooks/useAuth';
 
 export default function LandingPage() {
+  const { isAuthenticated, user } = useAuth();
+  
+  const cleanFullName = user?.full_name?.replace(/\s*\(Petani\)/gi, '') || '';
+
   return (
     <div className="flex flex-col justify-center h-full overflow-x-hidden overflow-y-auto md:overflow-hidden bg-gradient-to-br from-surface-dim via-surface-bright to-primary-container relative">
 
@@ -30,13 +35,22 @@ export default function LandingPage() {
             System
           </h1>
 
+          {isAuthenticated && (
+            <p className="text-primary font-display font-bold text-lg sm:text-xl md:text-2xl mt-4 sm:mt-6 animate-fade-in">
+              Selamat datang kembali, {cleanFullName}!
+            </p>
+          )}
+
           <p className="text-on-surface-variant text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mt-4 sm:mt-6 md:mt-8 font-sans leading-relaxed [@media(max-height:850px)]:md:text-base [@media(max-height:850px)]:lg:text-lg [@media(max-height:720px)]:text-sm [@media(max-height:720px)]:sm:text-sm [@media(max-height:720px)]:md:text-base [@media(max-height:720px)]:lg:text-base [@media(max-height:720px)]:mt-3 [@media(max-height:600px)]:text-xs [@media(max-height:600px)]:sm:text-xs [@media(max-height:600px)]:mt-2">
             Platform analitik spasial presisi tinggi untuk pemetaan kesuburan lahan, mendukung optimalisasi hasil agronomi dan pengelolaan lahan yang berkelanjutan.
           </p>
 
           <div className="mt-6 sm:mt-8 md:mt-10 flex flex-row gap-3 sm:gap-4 w-full sm:w-auto [@media(max-height:720px)]:mt-4 [@media(max-height:600px)]:mt-3">
-            <Link to="/login" className="bg-primary text-white px-5 py-3 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded-full font-sans font-bold hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:scale-105 flex items-center justify-center text-sm sm:text-base md:text-lg">
-              Jelajahi Peta
+            <Link 
+              to={isAuthenticated ? "/dashboard" : "/login"} 
+              className="bg-primary text-white px-5 py-3 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded-full font-sans font-bold hover:bg-primary/90 transition-all duration-300 shadow-xl shadow-primary/20 hover:scale-105 flex items-center justify-center text-sm sm:text-base md:text-lg"
+            >
+              {isAuthenticated ? "Buka Dashboard" : "Jelajahi Peta"}
             </Link>
             <Link to="/about" className="bg-surface/80 backdrop-blur-sm text-primary border border-outline-variant px-5 py-3 sm:px-8 sm:py-3.5 md:px-10 md:py-4 rounded-full font-sans font-bold hover:bg-surface-dim transition-all duration-300 hover:scale-105 flex items-center justify-center text-sm sm:text-base md:text-lg shadow-sm">
               Pelajari Sistem
