@@ -144,6 +144,7 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
             <TileLayer
               url={BASEMAP_LABELS_URLS[activeBasemap]!}
               attribution=""
+              pane="map-labels"
             />
           </Pane>
         )}
