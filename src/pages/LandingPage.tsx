@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import heroImg from '../assets/images/beranda.webp';
+import logoUrl from '../assets/icons/safrons.png';
 
 export default function LandingPage() {
   return (
     <div className="flex flex-col justify-center h-full overflow-y-auto md:overflow-hidden bg-gradient-to-br from-surface-dim via-surface-bright to-primary-container relative">
 
       {/* Background Masked Hero Image */}
-      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[80%] flex justify-end items-center opacity-70 pointer-events-none z-0">
+      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[80%] flex justify-end items-center opacity-20 lg:opacity-70 pointer-events-none z-0">
         <img
           src={heroImg}
           alt="SAFRONS Agritech Platform"
@@ -23,12 +24,12 @@ export default function LandingPage() {
 
         {/* Left Side Content */}
         <div className="flex flex-col justify-center items-start text-left w-full lg:w-[65%]">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface/60 backdrop-blur-md text-primary font-sans font-bold text-xs sm:text-sm mb-4 sm:mb-6 [@media(max-height:720px)]:mb-3 border border-primary/20 shadow-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          {/* Mobile-only branding logo */}
+          <div className="flex items-center gap-2.5 mb-6 md:hidden">
+            <img src={logoUrl} alt="SAFRONS Logo" className="h-10 w-auto" />
+            <span className="font-display text-2xl font-extrabold text-primary tracking-tight">
+              SAFRONS
             </span>
-            Platform Agritech Jawa Barat
           </div>
 
           <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-primary leading-[1.05] max-w-5xl tracking-tight [@media(max-height:850px)]:md:text-5xl [@media(max-height:850px)]:lg:text-6xl [@media(max-height:850px)]:xl:text-7xl [@media(max-height:720px)]:text-2xl [@media(max-height:720px)]:sm:text-3xl [@media(max-height:720px)]:md:text-4xl [@media(max-height:720px)]:lg:text-5xl [@media(max-height:720px)]:xl:text-6xl [@media(max-height:600px)]:text-xl [@media(max-height:600px)]:sm:text-2xl [@media(max-height:600px)]:md:text-3xl [@media(max-height:600px)]:lg:text-4xl">
