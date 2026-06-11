@@ -143,18 +143,18 @@ export default function AdminPanelPage() {
         
         {/* User Management Actions & Table */}
         <div className="space-y-6">
-          <div className="bg-surface-container-lowest rounded-3xl p-6 md:p-8 border border-outline-variant shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
             <div>
-              <h1 className="text-2xl font-bold text-on-surface font-display flex items-center gap-2.5">
-                <ShieldCheckIcon className="w-7 h-7 text-primary" />
+              <h1 className="text-3xl font-bold text-on-surface font-display flex items-center gap-2.5">
+                <ShieldCheckIcon className="w-8 h-8 text-primary" />
                 Manajemen Pengguna & Hak Akses
               </h1>
-              <p className="text-xs text-on-surface-variant mt-1.5">
+              <p className="text-on-surface-variant mt-2 text-sm md:text-base">
                 Daftar pengguna terdaftar di SAFRONS. Anda dapat mengubah peran atau mengaktifkan/menonaktifkan akun.
               </p>
             </div>
             
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 shrink-0">
               <button
                 onClick={() => setIsModalOpen(true)}
                 className="flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-full font-bold font-display hover:bg-primary/95 transition-all shadow-md active:scale-95 cursor-pointer text-sm"

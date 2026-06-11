@@ -287,7 +287,7 @@ export default function ExpertDashboardPage() {
           ) : (
             <>
               {/* Row 1: KPI Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
                 <div className="bg-surface-container-lowest border border-outline-variant/50 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <span className="text-xs font-bold text-on-surface-variant uppercase tracking-wider block mb-1">pH Tanah Rata-Rata</span>
                   <div className="flex items-baseline gap-2">
