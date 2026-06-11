@@ -462,14 +462,14 @@ export default function ExpertDashboardPage() {
                   )}
                 </div>
 
-                {/* Right: Critical Areas */}
+                {/* Right: Critical Soil Series */}
                 <div className="bg-surface-container-lowest border border-outline-variant/50 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
                   <div>
                     <h3 className="text-lg font-bold font-display text-on-surface mb-1 flex items-center gap-2">
                       <ArrowTrendingDownIcon className="w-5 h-5 text-error" />
-                      Wilayah Kritis Defisiensi Hara
+                      Seri Tanah Kritis Defisiensi Hara
                     </h3>
-                    <p className="text-xs text-on-surface-variant mb-4">Daftar 5 wilayah dengan kadar Nitrogen (N) atau Fosfor (P) terendah.</p>
+                    <p className="text-xs text-on-surface-variant mb-4">Daftar 5 tipe/seri tanah dengan kadar Nitrogen (N) atau Fosfor (P) terendah.</p>
                   </div>
 
                   {analytics?.critical_areas && analytics.critical_areas.length > 0 ? (
@@ -495,7 +495,7 @@ export default function ExpertDashboardPage() {
                     </div>
                   ) : (
                     <div className="py-12 text-center text-xs text-on-surface-variant/70 font-semibold border border-dashed border-outline-variant/60 rounded-2xl">
-                      Tidak ada wilayah kritis terdeteksi saat ini.
+                      Tidak ada seri tanah kritis terdeteksi saat ini.
                     </div>
                   )}
                 </div>
