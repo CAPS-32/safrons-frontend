@@ -13,6 +13,7 @@ import SavedRecordsPage from './pages/dashboard/SavedRecordsPage';
 import ProfilePage from './pages/dashboard/ProfilePage';
 import ExpertDashboardPage from './pages/dashboard/ExpertDashboardPage';
 import AdminPanelPage from './pages/admin/AdminPanelPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -36,11 +37,10 @@ function App() {
             <Route path="/records" element={<SavedRecordsPage />} />
             <Route path="/expert/panel" element={<ExpertDashboardPage />} />
             <Route path="/admin/panel" element={<AdminPanelPage />} />
-            <Route path="/dashboard/analysis" element={<div />} />
-            <Route path="/dashboard/reports" element={<div />} />
-            <Route path="/dashboard/admin" element={<div />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Route>
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
