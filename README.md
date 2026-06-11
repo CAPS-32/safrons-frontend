@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/safrons-logo.png" alt="SAFRONS Logo" height="100">
+  <img src="src\assets\icons\safrons.png" alt="SAFRONS Logo" height="100">
 
   # SAFRONS Frontend
 
@@ -14,7 +14,6 @@
   [![Axios](https://img.shields.io/badge/Axios-1.16.1-5A29E4?style=flat-square&logo=axios)](#)
   [![Vite](https://img.shields.io/badge/Vite-8.0.12-646CFF?style=flat-square&logo=vite)](#)
   [![PWA](https://img.shields.io/badge/PWA-Vite--Plugin--PWA-02002A?style=flat-square&logo=progressive-web-apps)](#)
-  [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](#)
 </div>
 
 ---
