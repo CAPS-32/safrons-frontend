@@ -46,7 +46,17 @@ export default function BottomNav() {
       {navLinks.map((link) => (
         <NavLink key={link.path} to={link.path} className={tabClass}>
           <link.icon className="w-5 h-5 shrink-0" />
-          <span className="text-[10px] tracking-tight">{link.label}</span>
+          <span className="text-[9px] tracking-tight leading-tight block text-center mt-1">
+            {link.label.includes(' ') ? (
+              <>
+                {link.label.split(' ')[0]}
+                <br />
+                {link.label.split(' ')[1]}
+              </>
+            ) : (
+              link.label
+            )}
+          </span>
         </NavLink>
       ))}
     </nav>
