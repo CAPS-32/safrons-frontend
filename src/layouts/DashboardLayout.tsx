@@ -7,6 +7,7 @@ import { SaveRegionModal } from '../components/map/SaveRegionModal';
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { haraService } from '../services/hara.service';
+import logoUrl from '../assets/icons/safrons.png';
 import type { GeoJSONFeature, GeoJSONFeatureCollection } from '../types/api.types';
 
 export type MapFilterType = 'none' | 'N' | 'P' | 'K' | 'pH';
@@ -73,9 +74,22 @@ export default function DashboardLayout() {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-surface">
-        <div className="text-xl font-bold text-primary animate-pulse font-display">
-          Memuat SAFRONS...
+      <div className="flex flex-col h-screen w-screen items-center justify-center bg-surface transition-all duration-300">
+        <div className="flex flex-col items-center justify-center space-y-5 animate-fade-in">
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-24 h-24 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+            <div className="w-16 h-16 bg-surface-container rounded-full flex items-center justify-center shadow-lg border border-outline-variant/30 animate-pulse">
+              <img src={logoUrl} alt="SAFRONS Logo" className="w-10 h-10 object-contain" />
+            </div>
+          </div>
+          <div className="flex flex-col items-center space-y-1">
+            <span className="text-2xl font-black text-primary font-display tracking-wider">
+              SAFRONS
+            </span>
+            <span className="text-[10px] text-on-surface-variant font-bold uppercase tracking-widest animate-pulse">
+              Memuat Sistem...
+            </span>
+          </div>
         </div>
       </div>
     );
