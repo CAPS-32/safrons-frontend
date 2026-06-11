@@ -9,7 +9,7 @@ import { haraService } from '../../services/hara.service';
 import { MapLegend } from './MapLegend';
 import { MapControls } from './MapControls';
 import type { GeoJSONFeatureCollection, GeoJSONFeature } from '../../types/api.types';
-import type { Layer, LeafletMouseEvent, PathOptions, LatLngBoundsExpression } from 'leaflet';
+import type { Layer, LeafletMouseEvent, PathOptions } from 'leaflet';
 import type { MapFilterType } from '../../layouts/DashboardLayout';
 import { getColorForpH, getColorForN, getColorForP, getColorForK } from '../../utils/agronomyHelper';
 
@@ -22,8 +22,6 @@ interface SpatialMapProps {
   selectedFeature: GeoJSONFeature | null;
 }
 
-
-const BOUNDS_DATA_AREA: LatLngBoundsExpression = [[ -5.9, 106.2 ], [ -7.6, 107.2 ]];
 
 // Current location (Lokasi Saya)
 const customMarkerIcon = L.divIcon({
@@ -206,9 +204,7 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
       <MapContainer
         center={[-6.595, 106.816]}
         zoom={12}
-        minZoom={9}
-        maxBounds={BOUNDS_DATA_AREA}
-        maxBoundsViscosity={1.0}
+        minZoom={6}
         className="h-full w-full z-0 relative"
         zoomControl={false}
         attributionControl={false}
