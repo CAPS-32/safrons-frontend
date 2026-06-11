@@ -1,4 +1,3 @@
-import React from 'react';
 import type { UserRead } from '../../types/api.types';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 
