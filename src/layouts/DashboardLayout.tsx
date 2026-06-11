@@ -6,12 +6,13 @@ import { SpatialMap } from '../components/map/SpatialMap';
 import { SaveRegionModal } from '../components/map/SaveRegionModal';
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import type { GeoJSONFeature } from '../types/api.types';
+import { haraService } from '../services/hara.service';
+import type { GeoJSONFeature, GeoJSONFeatureCollection } from '../types/api.types';
 
 export type MapFilterType = 'none' | 'N' | 'P' | 'K' | 'pH';
 
 export default function DashboardLayout() {
-
+  const [geoData, setGeoData] = useState<GeoJSONFeatureCollection | null>(null);
   const [selectedFeature, setSelectedFeature] = useState<GeoJSONFeature | null>(null);
   const [clickedCoordinates, setClickedCoordinates] = useState<{ lon: number; lat: number } | null>(null);
   const [currentLocation, setCurrentLocation] = useState<{ lat: number; lon: number } | null>(null);
@@ -22,20 +23,46 @@ export default function DashboardLayout() {
   const location = useLocation();
 
   useEffect(() => {
+    let isMounted = true;
+    const fetchAreas = async () => {
+      try {
+        const data = await haraService.getAreas();
+        if (isMounted) setGeoData(data);
+      } catch (error) {
+        if (isMounted) console.error('Failed to fetch hara areas:', error);
+      }
+    };
+    void fetchAreas();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleAreaUpdate = useCallback((updatedFeature: GeoJSONFeature) => {
+    setGeoData((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        features: prev.features.map((f) =>
+          f.properties.id === updatedFeature.properties.id ? updatedFeature : f
+        ),
+      };
+    });
+    setSelectedFeature(updatedFeature);
+  }, []);
+
+  useEffect(() => {
     const state = location.state as { flyToFeature?: GeoJSONFeature } | null;
     if (state?.flyToFeature) {
       setSelectedFeature(state.flyToFeature);
-
     } else {
       setSelectedFeature(null);
-
     }
   }, [location.pathname, location.state]);
 
   const handlePolygonClick = useCallback((lon: number, lat: number, feature: GeoJSONFeature) => {
     setSelectedFeature(feature);
     setClickedCoordinates({ lon, lat });
-
   }, []);
 
   useEffect(() => {
@@ -63,6 +90,7 @@ export default function DashboardLayout() {
         {/* Fullscreen Map */}
         <div className="absolute inset-0 z-0">
           <SpatialMap
+            geoData={geoData}
             onPolygonClick={handlePolygonClick}
             activeFilter={activeFilter}
             setActiveFilter={setActiveFilter}
@@ -80,9 +108,9 @@ export default function DashboardLayout() {
         {/* Data Panel */}
         <DataPanel
           selectedFeature={selectedFeature}
+          onAreaUpdate={handleAreaUpdate}
           onClose={() => {
             setSelectedFeature(null);
-
           }}
           onSaveClick={() => setIsSaveModalOpen(true)}
         />

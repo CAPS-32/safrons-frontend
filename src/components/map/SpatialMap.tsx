@@ -14,6 +14,7 @@ import type { MapFilterType } from '../../layouts/DashboardLayout';
 import { getColorForpH, getColorForN, getColorForP, getColorForK } from '../../utils/agronomyHelper';
 
 interface SpatialMapProps {
+  geoData: GeoJSONFeatureCollection | null;
   onPolygonClick: (lon: number, lat: number, feature: GeoJSONFeature) => void;
   activeFilter: MapFilterType;
   setActiveFilter: (filter: MapFilterType) => void;
@@ -51,6 +52,7 @@ const MapEffects: React.FC = () => {
 };
 
 export const SpatialMap: React.FC<SpatialMapProps> = ({
+  geoData,
   onPolygonClick,
   activeFilter,
   setActiveFilter,
@@ -58,7 +60,6 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
   setCurrentLocation,
   selectedFeature
 }) => {
-  const [geoData, setGeoData] = useState<GeoJSONFeatureCollection | null>(null);
   const [activeBasemap, setActiveBasemap] = useState<string>('standar');
   const [searchedLocation, setSearchedLocation] = useState<{ lat: number; lon: number; name: string } | null>(null);
   const geoJsonRef = useRef<L.GeoJSON>(null);
@@ -83,20 +84,6 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
     'jalan': '&copy; CartoDB &copy; OpenStreetMap',
     'topografi': '&copy; ESRI'
   };
-
-  useEffect(() => {
-    let isMounted = true;
-    const fetchAreas = async () => {
-      try {
-        const data = await haraService.getAreas();
-        if (isMounted) setGeoData(data);
-      } catch (error) {
-        if (isMounted) console.error('Failed to fetch hara areas:', error);
-      }
-    };
-    void fetchAreas();
-    return () => { isMounted = false; };
-  }, []);
 
   // Automatically select polygon if searched location falls within one
   useEffect(() => {
@@ -160,9 +147,21 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
   useEffect(() => {
     styleRef.current = getPolygonStyle;
     if (geoJsonRef.current) {
+      if (geoData) {
+        const featureMap = new Map(geoData.features.map(f => [f.properties.id, f]));
+        geoJsonRef.current.eachLayer((layer: any) => {
+          const id = layer.feature?.properties?.id;
+          if (id !== undefined) {
+            const updatedFeature = featureMap.get(id);
+            if (updatedFeature) {
+              layer.feature = updatedFeature;
+            }
+          }
+        });
+      }
       geoJsonRef.current.setStyle(getPolygonStyle);
     }
-  }, [selectedFeature, activeFilter, getPolygonStyle]);
+  }, [geoData, selectedFeature, activeFilter, getPolygonStyle]);
 
   const onEachFeature = useCallback((feature: GeoJSONFeature, layer: Layer) => {
     layer.on({
@@ -175,29 +174,30 @@ export const SpatialMap: React.FC<SpatialMapProps> = ({
       },
       mouseout: (e: LeafletMouseEvent) => {
         const target = e.target;
-
-        target.setStyle(styleRef.current(feature));
+        target.setStyle(styleRef.current(target.feature || feature));
       },
       click: (e: LeafletMouseEvent) => {
         const latLng = e.latlng;
-        onPolygonClick(latLng.lng, latLng.lat, feature);
+        // Make sure we pass the updated feature from layer.feature if available
+        onPolygonClick(latLng.lng, latLng.lat, (e.target as any).feature || feature);
       },
     });
-  }, [getPolygonStyle, onPolygonClick]);
+  }, [onPolygonClick]);
 
+  const hasData = geoData !== null;
   // Memoize the heavy GeoJSON layer
   const geoJsonLayer = React.useMemo(() => {
     if (!geoData) return null;
     return (
       <GeoJSON
         ref={geoJsonRef}
-        key={activeFilter}
         data={geoData}
         style={getPolygonStyle}
         onEachFeature={onEachFeature as any}
       />
     );
-  }, [geoData, activeFilter, getPolygonStyle, onEachFeature]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasData, activeFilter]);
 
   return (
     <>
