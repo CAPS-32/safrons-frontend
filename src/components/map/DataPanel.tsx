@@ -67,7 +67,7 @@ export default function DataPanel({
       />
 
       <div
-        className="absolute bottom-0 left-0 right-0 top-auto w-full max-h-[70vh] md:top-4 md:left-4 md:bottom-4 md:w-96 md:max-w-[calc(100vw-2rem)] md:h-auto z-[1000] bg-surface/95 backdrop-blur-md rounded-t-3xl rounded-b-none md:rounded-2xl shadow-2xl border-t border-x-0 border-b-0 md:border border-outline-variant flex flex-col overflow-hidden transition-all duration-500 ease-out animate-fade-in-up"
+        className="absolute bottom-0 left-0 right-0 top-auto w-auto max-h-[70vh] md:top-4 md:left-4 md:bottom-4 md:w-96 md:max-w-[calc(100vw-2rem)] md:h-[calc(100%-2rem)] md:max-h-none z-[1000] bg-surface/95 backdrop-blur-md rounded-t-3xl rounded-b-none md:rounded-2xl shadow-2xl border-t border-x-0 border-b-0 md:border border-outline-variant flex flex-col overflow-hidden transition-all duration-500 ease-out animate-fade-in-up"
         onClick={(e) => e.stopPropagation()}
         onMouseDown={(e) => e.stopPropagation()}
         onDoubleClick={(e) => e.stopPropagation()}

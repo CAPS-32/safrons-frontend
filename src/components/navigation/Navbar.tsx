@@ -60,7 +60,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-[2000] w-full bg-surface/85 backdrop-blur-md border-b border-outline-variant shadow-sm transition-colors hidden md:block">
+    <header className="sticky top-0 z-[2000] w-full bg-surface/85 backdrop-blur-md border-b border-outline-variant shadow-sm transition-colors">
       <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Left: Logo */}
         <div className="flex items-center">

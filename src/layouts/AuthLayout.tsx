@@ -38,7 +38,7 @@ export default function AuthLayout() {
   }
 
   return (
-    <div className="flex flex-col justify-center min-h-screen md:h-screen overflow-y-auto md:overflow-hidden bg-gradient-to-br from-surface-dim via-surface-bright to-primary-container relative">
+    <div className="flex flex-col justify-center min-h-screen md:h-screen overflow-x-hidden overflow-y-auto md:overflow-hidden bg-gradient-to-br from-surface-dim via-surface-bright to-primary-container relative">
       
       {/* Background Image */}
       <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[80%] flex justify-end items-center opacity-20 lg:opacity-70 pointer-events-none z-0">
