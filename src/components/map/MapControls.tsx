@@ -121,7 +121,7 @@ export const MapControls: React.FC<MapControlsProps> = ({
   // Expanded State
   return (
     <div 
-      className="absolute top-4 right-4 z-[1000] w-80 bg-surface/95 backdrop-blur-md rounded-2xl border border-outline-variant shadow-2xl p-5 flex flex-col gap-4 pointer-events-auto transition-all duration-300 ease-out"
+      className="absolute top-4 right-4 z-[1000] w-[calc(100vw-2rem)] max-w-xs md:w-80 bg-surface/95 backdrop-blur-md rounded-2xl border border-outline-variant shadow-2xl p-5 flex flex-col gap-4 pointer-events-auto transition-all duration-300 ease-out"
       onClick={stopPropagation}
       onPointerDown={stopPropagation}
       onDoubleClick={stopPropagation}

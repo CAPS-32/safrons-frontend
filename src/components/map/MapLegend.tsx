@@ -18,7 +18,7 @@ export const MapLegend: React.FC<MapLegendProps> = ({ activeFilter }) => {
   const { title, items } = activeLegend;
 
   return (
-    <div className="absolute bottom-6 right-6 z-[900] pointer-events-auto">
+    <div className="absolute bottom-24 md:bottom-6 right-4 md:right-6 z-[900] pointer-events-auto">
       {!isExpanded ? (
         <button 
           onClick={() => setIsExpanded(true)}
