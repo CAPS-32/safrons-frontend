@@ -33,8 +33,34 @@ export default function Navbar() {
       : 'text-on-surface-variant font-sans hover:text-primary hover:bg-surface-dim rounded-xl'
     }`;
 
+  const isExpert = user?.role === 'expert' || user?.role === 'admin';
+  const isAdmin = user?.role === 'admin';
+
+  let authenticatedLinks = AUTHENTICATED_NAV_LINKS;
+
+  if (isExpert) {
+    authenticatedLinks = authenticatedLinks.map((link) =>
+      link.path === '/records'
+        ? { label: 'Panel Pakar', path: '/expert/panel' }
+        : link
+    );
+  }
+
+  if (isAdmin) {
+    const aboutIndex = authenticatedLinks.findIndex((link) => link.path === '/about');
+    if (aboutIndex !== -1) {
+      authenticatedLinks = [
+        ...authenticatedLinks.slice(0, aboutIndex),
+        { label: 'Panel Admin', path: '/admin/panel' },
+        ...authenticatedLinks.slice(aboutIndex),
+      ];
+    } else {
+      authenticatedLinks = [...authenticatedLinks, { label: 'Panel Admin', path: '/admin/panel' }];
+    }
+  }
+
   return (
-    <header className="sticky top-0 z-[2000] w-full bg-surface/85 backdrop-blur-md border-b border-outline-variant shadow-sm transition-colors">
+    <header className="sticky top-0 z-[2000] w-full bg-surface/85 backdrop-blur-md border-b border-outline-variant shadow-sm transition-colors hidden md:block">
       <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Left: Logo */}
         <div className="flex items-center">
@@ -56,7 +82,7 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              {AUTHENTICATED_NAV_LINKS.map((link) => (
+              {authenticatedLinks.map((link) => (
                 <NavLink key={link.path} to={link.path} className={navLinkClass}>
                   {link.label}
                 </NavLink>
