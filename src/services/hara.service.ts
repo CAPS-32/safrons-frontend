@@ -5,7 +5,9 @@ import type {
   AdvisoryRead,
   HaraAreaUpdate,
   AdvisoryCreate,
-  AdvisoryUpdate
+  AdvisoryUpdate,
+  HaraAreaCreate,
+  MacroAnalyticsRead
 } from '../types/api.types';
 
 export const haraService = {
@@ -41,6 +43,16 @@ export const haraService = {
 
   updateAdvisory: async (advisoryId: number, data: AdvisoryUpdate): Promise<AdvisoryRead> => {
     const response = await apiClient.patch<AdvisoryRead>(`/api/v1/expert/advisories/${advisoryId}`, data);
+    return response.data;
+  },
+
+  createArea: async (data: HaraAreaCreate): Promise<GeoJSONFeature> => {
+    const response = await apiClient.post<GeoJSONFeature>('/api/v1/expert/hara/areas', data);
+    return response.data;
+  },
+
+  getMacroAnalytics: async (): Promise<MacroAnalyticsRead> => {
+    const response = await apiClient.get<MacroAnalyticsRead>('/api/v1/expert/analytics');
     return response.data;
   },
 };

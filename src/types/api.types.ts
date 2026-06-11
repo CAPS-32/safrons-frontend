@@ -93,3 +93,65 @@ export interface AdvisoryUpdate {
   is_active?: boolean | null;
 }
 
+export interface GlossaryTerm {
+  id: number;
+  term: string;
+  definition: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface GlossaryCreate {
+  term: string;
+  definition: string;
+}
+
+export interface GlossaryUpdate {
+  term?: string;
+  definition?: string;
+}
+
+export interface HaraAreaCreate {
+  geometry: any;
+  properties: {
+    name?: string | null;
+    ph_rata2?: number | null;
+    n_rata2?: number | null;
+    p_rata2?: number | null;
+    k_rata2?: number | null;
+    slope__?: string | null;
+    texture_of?: string | null;
+  };
+}
+
+export interface Averages {
+  ph: number;
+  n: number;
+  p: number;
+  k: number;
+}
+
+export interface PhDistribution {
+  sangat_masam: number;
+  masam: number;
+  sedikit_masam: number;
+  netral: number;
+  sedikit_alkalis: number;
+  alkalis: number;
+}
+
+export interface CriticalArea {
+  id: number;
+  name: string;
+  value: number;
+  parameter: string;
+}
+
+export interface MacroAnalyticsRead {
+  averages: Averages;
+  ph_distribution: PhDistribution;
+  critical_areas: CriticalArea[];
+}
+
+
+
