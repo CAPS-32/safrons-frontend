@@ -153,5 +153,43 @@ export interface MacroAnalyticsRead {
   critical_areas: CriticalArea[];
 }
 
+export interface DiagnosisFactor {
+  key: string;
+  label: string;
+  value: number | string | null;
+  status: string;
+  status_label: string;
+  severity: 'info' | 'watch' | 'attention' | 'critical';
+  message: string;
+}
+
+export interface DiagnosisRecommendation {
+  priority: number;
+  category: string;
+  title: string;
+  action: string;
+  reason: string;
+}
+
+export interface CropSuitability {
+  crop: string;
+  class: 'S1' | 'S2' | 'S3' | 'N';
+  limiting_factors: string[];
+  ph_class: 'S1' | 'S2' | 'S3' | 'N';
+  n_class: 'S1' | 'S2' | 'S3' | 'N';
+  p_class: 'S1' | 'S2' | 'S3' | 'N';
+  k_class: 'S1' | 'S2' | 'S3' | 'N';
+}
+
+export interface HaraDiagnosisRead {
+  rule_set_version: string;
+  status: 'ready' | 'insufficient_data';
+  summary: string;
+  area: any;
+  factors: DiagnosisFactor[];
+  recommendations: DiagnosisRecommendation[];
+  crop_suitabilities: CropSuitability[];
+}
+
 
 
