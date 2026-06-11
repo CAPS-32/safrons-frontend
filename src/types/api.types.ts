@@ -68,3 +68,28 @@ export interface UserRegister {
   password: string;
   full_name: string;
 }
+
+export interface HaraAreaUpdate {
+  name?: string | null;
+  ph_rata2?: number | null;
+  n_rata2?: number | null;
+  p_rata2?: number | null;
+  k_rata2?: number | null;
+  slope__?: string | null;
+  texture_of?: string | null;
+}
+
+export interface AdvisoryCreate {
+  title: string;
+  content: string;
+  category?: 'soil' | 'fertilizer' | 'general' | null;
+  is_active?: boolean;
+}
+
+export interface AdvisoryUpdate {
+  title?: string | null;
+  content?: string | null;
+  category?: 'soil' | 'fertilizer' | 'general' | null;
+  is_active?: boolean | null;
+}
+

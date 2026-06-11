@@ -1,5 +1,12 @@
 import { apiClient } from './axios';
-import type { GeoJSONFeatureCollection, GeoJSONFeature, AdvisoryRead } from '../types/api.types';
+import type { 
+  GeoJSONFeatureCollection, 
+  GeoJSONFeature, 
+  AdvisoryRead,
+  HaraAreaUpdate,
+  AdvisoryCreate,
+  AdvisoryUpdate
+} from '../types/api.types';
 
 export const haraService = {
   getAreas: async (): Promise<GeoJSONFeatureCollection> => {
@@ -21,4 +28,20 @@ export const haraService = {
     const response = await apiClient.get<AdvisoryRead[]>(`/api/v1/hara/areas/${areaId}/advisories`);
     return response.data;
   },
+
+  updateArea: async (areaId: number, data: HaraAreaUpdate): Promise<GeoJSONFeature> => {
+    const response = await apiClient.patch<GeoJSONFeature>(`/api/v1/expert/hara/areas/${areaId}`, data);
+    return response.data;
+  },
+
+  createAdvisory: async (areaId: number, data: AdvisoryCreate): Promise<AdvisoryRead> => {
+    const response = await apiClient.post<AdvisoryRead>(`/api/v1/expert/hara/areas/${areaId}/advisories`, data);
+    return response.data;
+  },
+
+  updateAdvisory: async (advisoryId: number, data: AdvisoryUpdate): Promise<AdvisoryRead> => {
+    const response = await apiClient.patch<AdvisoryRead>(`/api/v1/expert/advisories/${advisoryId}`, data);
+    return response.data;
+  },
 };
+
