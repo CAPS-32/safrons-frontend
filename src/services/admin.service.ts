@@ -1,5 +1,5 @@
 import { apiClient } from './axios';
-import type { UserRead, UserRegister } from '../types/api.types';
+import type { UserRead, UserRegister, HaraAreaChangeRead } from '../types/api.types';
 
 export interface UserCreateAdminPayload extends UserRegister {
   role: 'user' | 'expert' | 'admin';
@@ -25,4 +25,10 @@ export const adminService = {
     const response = await apiClient.patch<UserRead>(`/api/v1/admin/users/${userId}/status`, { is_active: isActive });
     return response.data;
   },
+
+  getAuditLogs: async (): Promise<HaraAreaChangeRead[]> => {
+    const response = await apiClient.get<HaraAreaChangeRead[]>('/api/v1/admin/audit-logs');
+    return response.data;
+  },
 };
+

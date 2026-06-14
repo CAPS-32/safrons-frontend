@@ -4,18 +4,36 @@ import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../contexts/ToastContext';
 import { adminService } from '../../services/admin.service';
 import UserTable from '../../components/admin/UserTable';
-import { ShieldCheckIcon, UserPlusIcon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
-import type { UserRead } from '../../types/api.types';
+import {
+  ShieldCheckIcon,
+  UserPlusIcon,
+  XMarkIcon,
+  ChevronDownIcon,
+  ClockIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/outline';
+
+import type { UserRead, HaraAreaChangeRead } from '../../types/api.types';
+
 
 export default function AdminPanelPage() {
   const { user, isLoading: isAuthLoading } = useAuth();
   const { showToast } = useToast();
   const navigate = useNavigate();
 
+  // Tabs state
+  const [activeTab, setActiveTab] = useState<'users' | 'audit'>('users');
+
+  // Users state
   const [users, setUsers] = useState<UserRead[]>([]);
   const [isUsersLoading, setIsUsersLoading] = useState(true);
   const [updatingUserId, setUpdatingUserId] = useState<number | null>(null);
   const [updatingStatusUserId, setUpdatingStatusUserId] = useState<number | null>(null);
+
+  // Audit logs state
+  const [auditLogs, setAuditLogs] = useState<HaraAreaChangeRead[]>([]);
+  const [isAuditLogsLoading, setIsAuditLogsLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
 
   // User Creation Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,14 +60,40 @@ export default function AdminPanelPage() {
     }
   };
 
+  const fetchAuditLogs = async () => {
+    try {
+      setIsAuditLogsLoading(true);
+      const data = await adminService.getAuditLogs();
+      setAuditLogs(data);
+    } catch (err) {
+      console.error('Failed to fetch audit logs:', err);
+      showToast('Gagal memuat log audit perubahan lahan.', 'error');
+    } finally {
+      setIsAuditLogsLoading(false);
+    }
+  };
+
+  const handleRefresh = () => {
+    if (activeTab === 'users') {
+      void fetchUsers();
+    } else {
+      void fetchAuditLogs();
+    }
+  };
+
   useEffect(() => {
     if (!isAuthLoading && !isAdmin) {
       showToast('Akses ditolak. Halaman ini hanya untuk Administrator.', 'error');
       void navigate('/dashboard');
     } else if (isAdmin) {
-      void fetchUsers();
+      if (activeTab === 'users') {
+        void fetchUsers();
+      } else {
+        void fetchAuditLogs();
+      }
     }
-  }, [isAdmin, isAuthLoading, navigate, showToast]);
+  }, [isAdmin, isAuthLoading, navigate, showToast, activeTab]);
+
 
   const handleRoleChange = async (userId: number, newRole: 'user' | 'expert' | 'admin') => {
     setUpdatingUserId(userId);
@@ -127,6 +171,16 @@ export default function AdminPanelPage() {
     }
   };
 
+  const filteredLogs = auditLogs.filter((log) => {
+    const term = searchTerm.toLowerCase();
+    const nameMatch = log.user.full_name?.toLowerCase().includes(term);
+    const emailMatch = log.user.email?.toLowerCase().includes(term);
+    const actionMatch = log.action.toLowerCase().includes(term);
+    const areaIdMatch = String(log.hara_area_id).includes(term);
+    const areaNameMatch = log.area_name?.toLowerCase().includes(term);
+    return nameMatch || emailMatch || actionMatch || areaIdMatch || areaNameMatch;
+  });
+
   if (isAuthLoading || !isAdmin) {
     return (
       <div className="flex h-screen items-center justify-center bg-surface">
@@ -141,47 +195,183 @@ export default function AdminPanelPage() {
     <div className="h-full bg-surface-dim p-4 md:p-10 overflow-y-auto pb-24 pointer-events-auto relative z-20">
       <div className="max-w-6xl mx-auto space-y-8">
         
-        {/* User Management Actions & Table */}
-        <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
-            <div>
-              <h1 className="text-3xl font-bold text-on-surface font-display flex items-center gap-2.5">
-                <ShieldCheckIcon className="w-8 h-8 text-primary" />
-                Manajemen Pengguna & Hak Akses
-              </h1>
-              <p className="text-on-surface-variant mt-2 text-sm md:text-base">
-                Daftar pengguna terdaftar di SAFRONS. Anda dapat mengubah peran atau mengaktifkan/menonaktifkan akun.
-              </p>
-            </div>
-            
-            <div className="flex items-center gap-3 shrink-0">
+        {/* Header Section */}
+        <div>
+          <h1 className="text-3xl font-bold text-on-surface font-display flex items-center gap-2.5">
+            <ShieldCheckIcon className="w-8 h-8 text-primary" />
+            Panel Administrasi SAFRONS
+          </h1>
+          <p className="text-on-surface-variant mt-2 text-sm md:text-base font-sans">
+            Mengelola akun pengguna, hak akses, dan memantau log audit perubahan data lahan oleh pakar.
+          </p>
+        </div>
+
+        {/* Tab Controls & Actions */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-outline-variant/60 pb-1.5 gap-4">
+          <div className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveTab('users')}
+              className={`px-5 py-2.5 font-display font-bold text-sm md:text-base border-b-2 transition-all cursor-pointer ${
+                activeTab === 'users'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-on-surface-variant hover:text-on-surface'
+              }`}
+            >
+              Manajemen Pengguna
+            </button>
+            <button
+              onClick={() => setActiveTab('audit')}
+              className={`px-5 py-2.5 font-display font-bold text-sm md:text-base border-b-2 transition-all cursor-pointer ${
+                activeTab === 'audit'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-on-surface-variant hover:text-on-surface'
+              }`}
+            >
+              Log Audit Perubahan Lahan
+            </button>
+          </div>
+          
+          <div className="flex items-center gap-3 shrink-0">
+            {activeTab === 'users' && (
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="flex items-center justify-center gap-2 px-5 py-3 bg-primary text-white rounded-full font-bold font-display hover:bg-primary/95 transition-all shadow-md active:scale-95 cursor-pointer text-sm"
+                className="flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white rounded-full font-bold font-display hover:bg-primary/95 transition-all shadow-md active:scale-95 cursor-pointer text-sm"
               >
                 <UserPlusIcon className="w-4 h-4" />
                 Tambah Pengguna
               </button>
-              <button
-                onClick={() => void fetchUsers()}
-                disabled={isUsersLoading}
-                className="px-5 py-3 bg-surface hover:bg-surface-container border border-outline text-on-surface rounded-full font-bold font-display transition-all disabled:opacity-50 text-sm cursor-pointer"
-              >
-                Segarkan
-              </button>
-            </div>
+            )}
+            <button
+              onClick={handleRefresh}
+              disabled={activeTab === 'users' ? isUsersLoading : isAuditLogsLoading}
+              className="px-5 py-2.5 bg-surface hover:bg-surface-container border border-outline text-on-surface rounded-full font-bold font-display transition-all disabled:opacity-50 text-sm cursor-pointer"
+            >
+              Segarkan
+            </button>
           </div>
-
-          <UserTable
-            users={users}
-            isLoading={isUsersLoading}
-            onRoleChange={handleRoleChange}
-            onStatusToggle={handleStatusToggle}
-            updatingUserId={updatingUserId}
-            updatingStatusUserId={updatingStatusUserId}
-            currentAdminId={user?.id}
-          />
         </div>
+
+        {/* Tab Contents */}
+        {activeTab === 'users' ? (
+          <div className="space-y-6">
+            <UserTable
+              users={users}
+              isLoading={isUsersLoading}
+              onRoleChange={handleRoleChange}
+              onStatusToggle={handleStatusToggle}
+              updatingUserId={updatingUserId}
+              updatingStatusUserId={updatingStatusUserId}
+              currentAdminId={user?.id}
+            />
+          </div>
+        ) : (
+          <div className="space-y-6">
+            {/* Search Filter for Audit Logs */}
+            <div className="relative max-w-md">
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-surface border border-outline-variant px-4 py-2.5 pl-10 rounded-xl text-sm text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                placeholder="Cari berdasarkan pakar, lahan, aksi..."
+              />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-on-surface-variant/70">
+                <MagnifyingGlassIcon className="h-4 w-4" />
+              </div>
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm('')}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-on-surface-variant hover:text-on-surface transition-colors"
+                >
+                  <XMarkIcon className="h-4 w-4" />
+                </button>
+              )}
+            </div>
+
+            {/* Audit Logs Table */}
+            {isAuditLogsLoading ? (
+              <div className="bg-surface-container-lowest border border-outline-variant rounded-3xl p-8 text-center animate-pulse shadow-md">
+                <div className="animate-spin rounded-full h-8 w-8 border-2 border-primary border-t-transparent mx-auto mb-4"></div>
+                <p className="text-on-surface-variant text-sm font-medium">Memuat log audit...</p>
+              </div>
+            ) : filteredLogs.length === 0 ? (
+              <div className="bg-surface-container-lowest border border-outline-variant rounded-3xl p-10 text-center text-on-surface-variant shadow-md">
+                <ClockIcon className="w-12 h-12 text-on-surface-variant/40 mx-auto mb-4" />
+                <h4 className="font-bold font-display text-lg text-on-surface mb-1">
+                  {searchTerm ? 'Pencarian Tidak Ditemukan' : 'Tidak Ada Log Audit'}
+                </h4>
+                <p className="text-sm max-w-sm mx-auto font-sans">
+                  {searchTerm
+                    ? `Tidak ada log audit yang cocok dengan kata kunci "${searchTerm}".`
+                    : 'Belum ada log riwayat perubahan data lahan yang tercatat oleh pakar.'}
+                </p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto border border-outline-variant rounded-3xl bg-surface-container-lowest shadow-md">
+                <table className="w-full text-left border-collapse font-sans">
+                  <thead>
+                    <tr className="bg-surface-dim border-b border-outline-variant/60 text-xs font-bold text-on-surface-variant font-display uppercase tracking-wider">
+                      <th className="px-6 py-4">Waktu</th>
+                      <th className="px-6 py-4">Pakar</th>
+                      <th className="px-6 py-4">Aksi</th>
+                      <th className="px-6 py-4">Lahan</th>
+                      <th className="px-6 py-4">Detail Perubahan</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-outline-variant/30 text-sm text-on-surface">
+                    {filteredLogs.map((log) => {
+                      const logDate = new Date(log.created_at);
+                      const formattedDate = new Intl.DateTimeFormat('id-ID', {
+                        dateStyle: 'medium',
+                        timeStyle: 'short',
+                      }).format(logDate);
+
+                      return (
+                        <tr key={log.id} className="hover:bg-surface-bright/50 transition-colors">
+                          <td className="px-6 py-4 whitespace-nowrap text-on-surface-variant font-medium text-xs">
+                            {formattedDate}
+                          </td>
+                          <td className="px-6 py-4">
+                            <div className="font-semibold">{log.user.full_name || 'Tanpa Nama'}</div>
+                            <div className="text-xs text-on-surface-variant font-mono">{log.user.email}</div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span
+                              className={`inline-flex px-3 py-1 rounded-full text-xs font-bold font-display uppercase tracking-wide border ${
+                                log.action === 'create'
+                                  ? 'bg-success/10 text-success border-success/20'
+                                  : 'bg-primary-container text-primary border-primary/20'
+                              }`}
+                            >
+                              {log.action === 'create' ? 'Buat' : 'Ubah'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="font-semibold text-xs text-on-surface-variant">ID: {log.hara_area_id}</div>
+                            <div className="font-medium text-sm text-on-surface">{log.area_name || 'Nama Lahan Tidak Tersedia'}</div>
+                          </td>
+                          <td className="px-6 py-4 max-w-md">
+                            <div className="flex flex-wrap gap-1.5">
+                              {Object.entries(log.changed_fields).map(([key, value]) => (
+                                <span
+                                  key={key}
+                                  className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-surface border border-outline-variant/75 text-on-surface-variant"
+                                >
+                                  <span className="font-bold text-primary mr-1">{formatFieldLabel(key)}:</span>
+                                  <span>{formatFieldValue(value)}</span>
+                                </span>
+                              ))}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Creation Modal Dialog */}
@@ -285,3 +475,26 @@ export default function AdminPanelPage() {
     </div>
   );
 }
+
+const formatFieldLabel = (key: string): string => {
+  const labels: Record<string, string> = {
+    name: 'Nama Lahan',
+    ph_rata2: 'pH Rata-rata',
+    n_rata2: 'Kadar N',
+    p_rata2: 'Kadar P',
+    k_rata2: 'Kadar K',
+    slope__: 'Kemiringan Lereng (%)',
+    texture_of: 'Tekstur Tanah',
+    geometry_type: 'Tipe Geometri',
+  };
+  return labels[key] || key;
+};
+
+const formatFieldValue = (value: any): string => {
+  if (value === null || value === undefined) return '-';
+  if (typeof value === 'number') {
+    return value.toFixed(2);
+  }
+  return String(value);
+};
+

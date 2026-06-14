@@ -191,5 +191,13 @@ export interface HaraDiagnosisRead {
   crop_suitabilities: CropSuitability[];
 }
 
-
-
+export interface HaraAreaChangeRead {
+  id: number;
+  hara_area_id: number;
+  user_id: number;
+  action: 'create' | 'update' | string;
+  changed_fields: Record<string, any>;
+  created_at: string;
+  user: UserRead;
+  area_name?: string | null;
+}
