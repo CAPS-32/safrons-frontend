@@ -28,33 +28,33 @@ export const MAP_LEGENDS = {
   N: {
     title: 'Kandungan Nitrogen',
     items: [
-      { color: '#991B1B', label: '< 10 (Sangat Rendah)' },
-      { color: '#ba1a1a', label: '10 - 20 (Rendah)' },
-      { color: '#FFD700', label: '21 - 50 (Sedang)' },
-      { color: '#8EC849', label: '51 - 75 (Tinggi)' },
-      { color: '#2C5E2E', label: '> 75 (Sangat Tinggi)' },
+      { color: '#991B1B', label: '< 1.99 (Sangat Rendah)' },
+      { color: '#ba1a1a', label: '1.99 - 2.45 (Rendah)' },
+      { color: '#FFD700', label: '2.46 - 4.16 (Sedang)' },
+      { color: '#8EC849', label: '4.17 - 5.54 (Tinggi)' },
+      { color: '#2C5E2E', label: '> 5.54 (Sangat Tinggi)' },
       { color: '#9CA3AF', label: 'Tidak Ada Data' }
     ]
   },
   P: {
     title: 'Kandungan Fosfor',
     items: [
-      { color: '#991B1B', label: '< 15 (Sangat Rendah)' },
-      { color: '#ba1a1a', label: '15 - 20 (Rendah)' },
-      { color: '#FFD700', label: '21 - 40 (Sedang)' },
-      { color: '#8EC849', label: '41 - 60 (Tinggi)' },
-      { color: '#2C5E2E', label: '> 60 (Sangat Tinggi)' },
+      { color: '#991B1B', label: '< 6.67 (Sangat Rendah)' },
+      { color: '#ba1a1a', label: '6.67 - 7.79 (Rendah)' },
+      { color: '#FFD700', label: '7.80 - 8.02 (Sedang)' },
+      { color: '#8EC849', label: '8.03 - 8.97 (Tinggi)' },
+      { color: '#2C5E2E', label: '> 8.97 (Sangat Tinggi)' },
       { color: '#9CA3AF', label: 'Tidak Ada Data' }
     ]
   },
   K: {
     title: 'Kandungan Kalium (mg/100g)',
     items: [
-      { color: '#991B1B', label: '< 10 (Sangat Rendah)' },
-      { color: '#ba1a1a', label: '10 - 20 (Rendah)' },
-      { color: '#FFD700', label: '21 - 40 (Sedang)' },
-      { color: '#8EC849', label: '41 - 60 (Tinggi)' },
-      { color: '#2C5E2E', label: '> 60 (Sangat Tinggi)' },
+      { color: '#991B1B', label: '< 14.7 (Sangat Rendah)' },
+      { color: '#ba1a1a', label: '14.7 - 19.7 (Rendah)' },
+      { color: '#FFD700', label: '19.8 - 33.1 (Sedang)' },
+      { color: '#8EC849', label: '33.2 - 44.8 (Tinggi)' },
+      { color: '#2C5E2E', label: '> 44.8 (Sangat Tinggi)' },
       { color: '#9CA3AF', label: 'Tidak Ada Data' }
     ]
   }
