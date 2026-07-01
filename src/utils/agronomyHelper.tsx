@@ -40,30 +40,30 @@ export const getPhBadge = (ph: number | undefined | null) => {
 export const getNBadge = (n: number | undefined | null) => {
   const v = getSafeValue(n);
   if (v === null) return <span className="bg-outline-variant text-on-surface-variant px-2 py-0.5 rounded-md text-[10px] font-bold">Tidak Ada Data</span>;
-  if (v < 10) return <span className="bg-[#991B1B] text-white px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Rendah</span>;
-  if (v <= 20) return <span className="bg-error text-on-error px-2 py-0.5 rounded-md text-[10px] font-bold">Rendah</span>;
-  if (v <= 50) return <span className="bg-tertiary text-on-tertiary px-2 py-0.5 rounded-md text-[10px] font-bold">Sedang</span>;
-  if (v <= 75) return <span className="bg-[#8EC849] text-on-surface px-2 py-0.5 rounded-md text-[10px] font-bold">Tinggi</span>;
+  if (v <= 1.989691) return <span className="bg-[#991B1B] text-white px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Rendah</span>;
+  if (v <= 2.450581) return <span className="bg-error text-on-error px-2 py-0.5 rounded-md text-[10px] font-bold">Rendah</span>;
+  if (v <= 4.158587) return <span className="bg-tertiary text-on-tertiary px-2 py-0.5 rounded-md text-[10px] font-bold">Sedang</span>;
+  if (v <= 5.5412572) return <span className="bg-[#8EC849] text-on-surface px-2 py-0.5 rounded-md text-[10px] font-bold">Tinggi</span>;
   return <span className="bg-primary text-on-primary px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Tinggi</span>;
 };
 
 export const getPBadge = (p: number | undefined | null) => {
   const v = getSafeValue(p);
   if (v === null) return <span className="bg-outline-variant text-on-surface-variant px-2 py-0.5 rounded-md text-[10px] font-bold">Tidak Ada Data</span>;
-  if (v < 15) return <span className="bg-[#991B1B] text-white px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Rendah</span>;
-  if (v <= 20) return <span className="bg-error text-on-error px-2 py-0.5 rounded-md text-[10px] font-bold">Rendah</span>;
-  if (v <= 40) return <span className="bg-tertiary text-on-tertiary px-2 py-0.5 rounded-md text-[10px] font-bold">Sedang</span>;
-  if (v <= 60) return <span className="bg-[#8EC849] text-on-surface px-2 py-0.5 rounded-md text-[10px] font-bold">Tinggi</span>;
+  if (v <= 6.672457) return <span className="bg-[#991B1B] text-white px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Rendah</span>;
+  if (v <= 7.790811) return <span className="bg-error text-on-error px-2 py-0.5 rounded-md text-[10px] font-bold">Rendah</span>;
+  if (v <= 8.022388) return <span className="bg-tertiary text-on-tertiary px-2 py-0.5 rounded-md text-[10px] font-bold">Sedang</span>;
+  if (v <= 8.970512) return <span className="bg-[#8EC849] text-on-surface px-2 py-0.5 rounded-md text-[10px] font-bold">Tinggi</span>;
   return <span className="bg-primary text-on-primary px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Tinggi</span>;
 };
 
 export const getKBadge = (k: number | undefined | null) => {
   const v = getSafeValue(k);
   if (v === null) return <span className="bg-outline-variant text-on-surface-variant px-2 py-0.5 rounded-md text-[10px] font-bold">Tidak Ada Data</span>;
-  if (v < 100) return <span className="bg-[#991B1B] text-white px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Rendah</span>;
-  if (v <= 200) return <span className="bg-error text-on-error px-2 py-0.5 rounded-md text-[10px] font-bold">Rendah</span>;
-  if (v <= 400) return <span className="bg-tertiary text-on-tertiary px-2 py-0.5 rounded-md text-[10px] font-bold">Sedang</span>;
-  if (v <= 600) return <span className="bg-[#8EC849] text-on-surface px-2 py-0.5 rounded-md text-[10px] font-bold">Tinggi</span>;
+  if (v <= 146.97696) return <span className="bg-[#991B1B] text-white px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Rendah</span>;
+  if (v <= 197.49262) return <span className="bg-error text-on-error px-2 py-0.5 rounded-md text-[10px] font-bold">Rendah</span>;
+  if (v <= 331.24494) return <span className="bg-tertiary text-on-tertiary px-2 py-0.5 rounded-md text-[10px] font-bold">Sedang</span>;
+  if (v <= 447.9228) return <span className="bg-[#8EC849] text-on-surface px-2 py-0.5 rounded-md text-[10px] font-bold">Tinggi</span>;
   return <span className="bg-primary text-on-primary px-2 py-0.5 rounded-md text-[10px] font-bold">Sangat Tinggi</span>;
 };
 
@@ -86,30 +86,29 @@ export const getColorForpH = (val: number | null): string => {
 export const getColorForN = (val: number | null): string => {
   const v = getSafeValue(val);
   if (v === null) return '#9CA3AF';
-  if (v < 10) return '#991B1B';
-  if (v <= 20) return '#ba1a1a';
-  if (v <= 50) return '#FFD700';
-  if (v <= 75) return '#8EC849';
+  if (v <= 1.989691) return '#991B1B';
+  if (v <= 2.450581) return '#ba1a1a';
+  if (v <= 4.158587) return '#FFD700';
+  if (v <= 5.5412572) return '#8EC849';
   return '#2C5E2E';
 };
 
 export const getColorForP = (val: number | null): string => {
   const v = getSafeValue(val);
   if (v === null) return '#9CA3AF';
-  if (v < 15) return '#991B1B';
-  if (v <= 20) return '#ba1a1a';
-  if (v <= 40) return '#FFD700';
-  if (v <= 60) return '#8EC849';
+  if (v <= 6.672457) return '#991B1B';
+  if (v <= 7.790811) return '#ba1a1a';
+  if (v <= 8.022388) return '#FFD700';
+  if (v <= 8.970512) return '#8EC849';
   return '#2C5E2E';
 };
 
 export const getColorForK = (val: number | null): string => {
   const v = getSafeValue(val);
   if (v === null) return '#9CA3AF';
-  
-  if (v < 100) return '#991B1B';
-  if (v <= 200) return '#ba1a1a';
-  if (v <= 400) return '#FFD700';
-  if (v <= 600) return '#8EC849';
+  if (v <= 146.97696) return '#991B1B';
+  if (v <= 197.49262) return '#ba1a1a';
+  if (v <= 331.24494) return '#FFD700';
+  if (v <= 447.9228) return '#8EC849';
   return '#2C5E2E';
 };
